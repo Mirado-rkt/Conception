@@ -49,3 +49,16 @@ clients(<b>id_cli</b>,nom)
     .Non, la clé étrangère id_client ne doit pas être NOT NULL (elle doit autoriser les valeurs NULL), car la plupart des clients sont de passage et n'ont pas de profil enregistré. Il faut utiliser une jointure externe de type LEFT JOIN (en partant de la table commande vers client) pour afficher toutes les commandes sans en perdre aucune, même celles qui n'ont pas de client rattaché
 
 ### Etape 5: Les serveurs et les tables
+
+<u>Creation de la table "serveurs"</u>
+
+serveurs(<b>id_serveur</b>,nom)
+
+<u>creation de la table "table_salle"</u>
+
+table_salle(<b>id_table</b>,numero_table)
+
+<u>question piege</u>
+
+    .Une table de la salle est un élément physique du restaurant (le meuble où s'assoient les clients), tandis qu'une commande représente un acte d'achat qui peut s'y dérouler (ou être à emporter, sans table).
+    Le mot TABLE pose un problème en SQL car c'est un mot-clé réservé du langage (utilisé pour créer des structures de données avec CREATE TABLE). L'utiliser comme nom de table provoquerait des erreurs de syntaxe, c'est pourquoi il faut le renommer (par exemple table_salle)

@@ -18,3 +18,13 @@ GROUP BY c.id_com;
 SELECT c.id_com,c.date_com ,COALESCE(cl.nom, 'client de passage') AS nom_client
 FROM commande c
 LEFT JOIN clients cl ON c.id_cli = cl.id_cli;
+
+
+//nombre de commandes et chiffre d'affaire par serveur
+SELECT s.nom, COUNT(c.id_com) AS nombre_de_commandes, SUM(p.prix * cont.quantite) AS chiffre_d_affaire
+FROM serveur s
+LEFT JOIN commande c ON s.id_serv = c.id_serv
+LEFT JOIN contenir cont ON c.id_com = cont.id_com
+LEFT JOIN plats p ON cont.id_plat = p.id_plat
+GROUP BY s.id_serv, s.nom;
+

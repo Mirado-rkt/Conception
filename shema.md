@@ -14,4 +14,9 @@ Plats(<b>id_plat</b>,nom,prix)
 .<b>id_plat</b> est le identifiant avec SERIAL PRIMARY KEY commen type
 
 ### Etape 2: Les categorie
+<u>Creation de la table "categorie"</u>
 
+Categorie(<b>id_categorie</b>,nom)
+<u>Question piege</u>
+
+    .car si on ajoute une categorie dans la table plats, on ne pourra pas faire de jointure avec la table categorie

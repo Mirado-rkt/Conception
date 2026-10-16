@@ -7,3 +7,9 @@ FROM categorie c
 LEFT JOIN plats p ON c.id_cat = p.id_cat
 GROUP BY c.id_cat, c.nom;
 
+// Montant total de chaque commande
+SELECT c.id_com, SUM(p.prix * cont.quantite) AS montant_total
+FROM commande c
+JOIN contenir cont ON c.id_com = cont.id_com
+JOIN plats p ON cont.id_plat = p.id_plat
+GROUP BY c.id_com;

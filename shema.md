@@ -62,3 +62,19 @@ table_salle(<b>id_table</b>,numero_table)
 
     .Une table de la salle est un élément physique du restaurant (le meuble où s'assoient les clients), tandis qu'une commande représente un acte d'achat qui peut s'y dérouler (ou être à emporter, sans table).
     Le mot TABLE pose un problème en SQL car c'est un mot-clé réservé du langage (utilisé pour créer des structures de données avec CREATE TABLE). L'utiliser comme nom de table provoquerait des erreurs de syntaxe, c'est pourquoi il faut le renommer (par exemple table_salle)
+
+## Niveau 2
+### Etape 6: les paiments
+<u>creation de la table "mode_paiement"</u>
+
+mode_paiement(<b>id_mode</b>,nom)
+
+<u>creation de la table "paiement"</u>
+
+paiement(<b>id_paiement</b>,<b>id_com</b>,<b>id_mode</b>,montant)
+
+<u>question piege</u>
+
+    .une colonne unique montant_paye ne suffit pas car un client peut regler sa commande en plusieurs fois ou via plusieurs moyens de paiement distincts (ex: une partie en especes et le reste par MVola), ce qui necessite une table dediee pour enregistrer chaque transaction. Concernant le mode de paiement, une table de reference est preferable a une contrainte CHECK car elle est plus evolutive : elle permet d'ajouter de nouveaux operateurs ou modes de paiement sans modifier la structure de la table (ALTER TABLE), tout en garantissant l'integritee des donnees
+
+### Etape 7: les prix changent

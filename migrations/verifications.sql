@@ -28,3 +28,13 @@ LEFT JOIN contenir cont ON c.id_com = cont.id_com
 LEFT JOIN plats p ON cont.id_plat = p.id_plat
 GROUP BY s.id_serv, s.nom;
 
+
+// liste des commandes non soldees avec montant du,paye et reste a paye
+SELECT c.id_com, COALESCE(SUM(DISTINCT p.prix * cont.quantite), 0) AS montant_du, COALESCE(SUM(pay.montant), 0) AS montant_paye,
+(COALESCE(SUM(DISTINCT p.prix * cont.quantite), 0) - COALESCE(SUM(pay.montant), 0)) AS reste_a_payer
+FROM commande c
+LEFT JOIN contenir cont ON c.id_com = cont.id_com
+LEFT JOIN plats p ON cont.id_plat = p.id_plat
+LEFT JOIN paiement pay ON c.id_com = pay.id_com
+GROUP BY c.id_com
+HAVING (COALESCE(SUM(DISTINCT p.prix * cont.quantite), 0) - COALESCE(SUM(pay.montant), 0)) > 0;
